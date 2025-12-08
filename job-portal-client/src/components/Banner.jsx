@@ -4,8 +4,8 @@ const Banner = ({query, handleInputChange }) => {
 
   return (
     <div className='max-w-screen-2xl container mx-auto xl:px-24 px-4 md:py py-14'>
-        <h1 className="text-5xl font-bold text-primary mb-3">Find your <span className="text-blue">new job</span> today</h1>
-        <p className="text-lg text-black/70 mb-8">Thousands of jobs in the software, engineering and technology sector are waiting for you.</p>
+        <h1 className="text-5xl font-bold text-primary mb-3">Tuổi trẻ <span className="text-blue">Bách Khoa</span></h1>
+        <p className="text-lg text-black/70 mb-8">Hết mức trong công cuộc đổi mới đất nước</p>
     
     <form className="" action="" method="">
         <div className="flex justify-start md:flex-row flex-col md:gap-0 gap-4">

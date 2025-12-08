@@ -1,11 +1,9 @@
-
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Home from "../assets/Pages/Home";
 import About from "../assets/Pages/About";
 import CreateJob from "../assets/Pages/CreateJob";
 import MyJobs from "../assets/Pages/MyJobs";
-import UpdateJob from "../assets/Pages/UpdateJob";
 import Login from "../components/Login";
 import Signup from "../components/Signup";
 import AdminDashboard from "../assets/Pages/AdminDashboard";
@@ -33,18 +31,25 @@ const router = createBrowserRouter([
       },
       {
         path: "/edit-job/:id",
-        element: <UpdateJob />,
-        loader: ({ params }) => fetch(`http://localhost:3000/job/${params.id}`),
+        element: <CreateJob />,
       },
       {
         path: "/admin",
         // Protect the Admin Dashboard route
-        element: <PrivateRoute><AdminDashboard /></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <AdminDashboard />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/admin/manage-officers",
         // Protect the Manage Officers route
-        element: <PrivateRoute><ManageOfficers /></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <ManageOfficers />
+          </PrivateRoute>
+        ),
       },
     ],
   },

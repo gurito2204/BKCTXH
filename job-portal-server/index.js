@@ -25,6 +25,9 @@ const client = new MongoClient(uri, {
   },
 });
 
+// Define an array of super-admin emails
+const SUPER_ADMIN_EMAILS = ["nofapplz04@gmail.com", "abcadmin@gmail.com"];
+
 async function run() {
   try {
     // Connect to the database first
@@ -39,15 +42,15 @@ async function run() {
 
     // --- All API Endpoints will be defined here ---
 
-    // Get user and FORCE ADMIN ROLE for the main admin email
+    // Get user and FORCE ADMIN ROLE for super-admins
     app.get("/user/:email", async (req, res) => {
       const email = req.params.email;
       const user = await usersCollection.findOne({ email: email });
 
       if (user) {
         // ** SUPERUSER CHECK **
-        // This ensures the main admin account always has admin rights.
-        if (user.email === "nofapplz04@gmail.com") {
+        // This ensures the main admin accounts always have admin rights.
+        if (SUPER_ADMIN_EMAILS.includes(user.email)) {
           user.role = "admin";
         }
         res.send(user);
@@ -86,8 +89,8 @@ async function run() {
         return res.status(404).send({ message: "Không tìm thấy người dùng." });
       }
 
-      // Enforce admin role for superuser before authorization check
-      if (user.email === "nofapplz04@gmail.com") {
+      // Enforce admin role for superusers before authorization check
+      if (SUPER_ADMIN_EMAILS.includes(user.email)) {
         user.role = "admin";
       }
 
@@ -119,9 +122,20 @@ async function run() {
       res.send(jobs);
     });
 
-    // Get Jobs by email for MyJobs page
+    // Get Jobs by email for MyJobs page - with ADMIN override
     app.get("/myJobs/:email", async (req, res) => {
-      const jobs = await jobsCollections.find({ postedBy: req.params.email }).toArray();
+      const requestorEmail = req.params.email;
+      const user = await usersCollection.findOne({ email: requestorEmail });
+
+      let query = { postedBy: requestorEmail };
+
+      // ** ADMIN OVERRIDE **
+      // If the user is an admin or a super-admin, show them all jobs.
+      if (user && (user.role === "admin" || SUPER_ADMIN_EMAILS.includes(requestorEmail))) {
+        query = {}; // Empty query finds all documents
+      }
+
+      const jobs = await jobsCollections.find(query).toArray();
       res.send(jobs);
     });
 
@@ -257,8 +271,8 @@ async function run() {
         return res.status(400).send({ message: "Email is required." });
       }
 
-      // Prevent the super-admin from being demoted
-      if (email === "nofapplz04@gmail.com") {
+      // Prevent the super-admins from being demoted
+      if (SUPER_ADMIN_EMAILS.includes(email)) {
         return res.status(403).send({ message: "Không thể xóa quyền của quản trị viên cao nhất." });
       }
 
