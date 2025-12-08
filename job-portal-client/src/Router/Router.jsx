@@ -1,15 +1,18 @@
+
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Home from "../assets/Pages/Home";
 import About from "../assets/Pages/About";
 import CreateJob from "../assets/Pages/CreateJob";
 import MyJobs from "../assets/Pages/MyJobs";
-import SalaryPage from "../assets/Pages/SalaryPage";
 import UpdateJob from "../assets/Pages/UpdateJob";
 import Login from "../components/Login";
-import JobDetails from "../assets/Pages/JobDetails";
 import Signup from "../components/Signup";
 import AdminDashboard from "../assets/Pages/AdminDashboard";
+import Profile from "../assets/Pages/Profile";
+import ManageOfficers from "../assets/Pages/ManageOfficers";
+import PrivateRoute from "./PrivateRoute.jsx"; // FIX: Explicitly add the .jsx extension
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,31 +23,31 @@ const router = createBrowserRouter([
         path: "/post-job",
         element: <CreateJob />,
       },
-
       {
         path: "/my-job",
         element: <MyJobs />,
       },
       {
-        path: "/salary",
-        element: <SalaryPage />,
+        path: "/profile",
+        element: <Profile />,
       },
       {
         path: "/edit-job/:id",
         element: <UpdateJob />,
-        loader: ({ params }) => fetch(`https://mern-job-portal-website.vercel.app/all-jobs/${params.id}`),
-      },
-      {
-        path: "/job/:id",
-        element: <JobDetails />,
+        loader: ({ params }) => fetch(`http://localhost:3000/job/${params.id}`),
       },
       {
         path: "/admin",
-        element: <AdminDashboard />,
+        // Protect the Admin Dashboard route
+        element: <PrivateRoute><AdminDashboard /></PrivateRoute>,
+      },
+      {
+        path: "/admin/manage-officers",
+        // Protect the Manage Officers route
+        element: <PrivateRoute><ManageOfficers /></PrivateRoute>,
       },
     ],
   },
-
   {
     path: "/login",
     element: <Login />,
