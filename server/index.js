@@ -26,7 +26,7 @@ const client = new MongoClient(uri, {
 });
 
 // Define an array of super-admin emails
-const SUPER_ADMIN_EMAILS = ["nofapplz04@gmail.com", "abcadmin@gmail.com"];
+const SUPER_ADMIN_EMAILS = ["nofapplz04@gmail.com", "abcadmin@gmail.com", "minh.vutakeshi@hcmut.edu.vn"];
 
 async function run() {
   try {
