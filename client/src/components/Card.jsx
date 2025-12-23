@@ -1,13 +1,14 @@
 
 import React from 'react';
-import { FiCalendar, FiMapPin, FiDollarSign } from 'react-icons/fi';
+import { FiCalendar, FiMapPin } from 'react-icons/fi';
+import { GrActions } from "react-icons/gr";
 
 const Card = ({ data, onDetailsClick }) => {
   const {
     jobTitle,
     jobLocation,
-    minPrice,
-    maxPrice,
+    minBenefits,
+    maxBenefits,
     postingDate,
     description,
   } = data;
@@ -24,7 +25,7 @@ const Card = ({ data, onDetailsClick }) => {
             <FiCalendar /> {postingDate}
           </span>
           <span className="flex items-center gap-2">
-            <FiDollarSign /> {minPrice}-{maxPrice} ngày
+            <GrActions /> {minBenefits}-{maxBenefits} ngày
           </span>
         </div>
         <p className="text-base text-primary/70">{description.length > 150 ? `${description.substring(0, 150)}...` : description}</p>

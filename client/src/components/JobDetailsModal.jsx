@@ -57,13 +57,13 @@ const JobDetailsModal = ({ job, onClose }) => {
     if (hasApplied) {
       return (
         <button disabled className="bg-green-500 text-white font-bold py-2 px-6 rounded-full">
-          Đã ứng tuyển
+          Đã đăng kí
         </button>
       );
     }
     return (
       <button className="bg-blue-600 hover:bg-blue-700 text-black font-bold py-2 px-6 rounded-full transition duration-300" onClick={handleApply}>
-        Ứng tuyển ngay
+        Đăng kí
       </button>
     );
   };
@@ -87,7 +87,7 @@ const JobDetailsModal = ({ job, onClose }) => {
               <span className="font-bold">Ngày hoạt động:</span> {new Date(job.postingDate).toLocaleDateString()}
             </p>
             <p>
-              <span className="font-bold">Quyền lợi (ngày CTXH):</span> {job.minPrice} - {job.maxPrice} ngày
+              <span className="font-bold">Quyền lợi (ngày CTXH):</span> {job.minBenefits} - {job.maxBenefits} ngày
             </p>
           </div>
           <div>

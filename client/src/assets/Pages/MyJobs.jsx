@@ -121,9 +121,6 @@ const MyJobs = () => {
                         <button onClick={() => handleViewApplicants(job)} className="bg-blue-600 text-black px-4 py-2 rounded hover:bg-blue-700">
                           Xem ứng viên
                         </button>
-                        <Link to={`/edit-job/${job._id}`} className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">
-                          Sửa
-                        </Link>
                         <button onClick={() => handleDelete(job._id)} className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
                           Xóa
                         </button>

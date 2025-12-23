@@ -82,12 +82,12 @@ const Home = () => {
 
   const renderContent = () => {
     if (isLoading) return <p className="font-medium">Loading...</p>;
-    if (error) return <p className="font-medium text-red-500">Error: {error}. Could not load job data.</p>;
+    if (error) return <p className="font-medium text-red-500">Error: {error}. Không tải được dữ liệu.</p>;
     if (filteredAndSortedJobs.length > 0) {
       return (
         <>
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-bold">{filteredAndSortedJobs.length} Jobs Found</h3>
+            <h3 className="text-lg font-bold">{filteredAndSortedJobs.length} Kết quả tìm kiếm</h3>
             <div className="flex items-center gap-2">
               <label className="font-semibold">Sort by:</label>
               <select onChange={handleSortChange} value={sortOption} className="bg-white border p-2 rounded">
@@ -103,8 +103,8 @@ const Home = () => {
     }
     return (
       <>
-        <h3 className="text-lg font-bold mb-2">0 Jobs Found</h3>
-        <p>No jobs match the selected filters.</p>
+        <h3 className="text-lg font-bold mb-2">0 hoạt động</h3>
+        <p>Không có hoạt động nào phù hợp.</p>
       </>
     );
   };
@@ -122,7 +122,7 @@ const Home = () => {
             Previous
           </button>
           <span className="mx-2">
-            Page {currentPage} of {totalPages}
+            Page {currentPage} trong số {totalPages}
           </span>
           <button onClick={nextPage} disabled={currentPage === totalPages} className="hover:underline font-bolder">
             Next
